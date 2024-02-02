@@ -1,4 +1,6 @@
-function checkPassword() {
+window.onload = function () {
+    console.log("Script loaded successfully.");
+}function checkPassword() {
     var enteredPassword = document.getElementById('password').value;
     if (enteredPassword === '2000174786') {
         showHiddenContent();
