@@ -4,24 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Matrix Website</title>
+    <script src="script.js" defer></script>
+    <title>Matrix Code</title>
 </head>
 <body>
     <div class="matrix-bg">
         <div class="container">
             <h1>Welcome to the Matrix</h1>
-            <p>Please enter the code:</p>
-            <input type="password" id="passwordInput" placeholder="Enter code">
+            <div id="matrix-code"></div>
+            <label for="password">Enter the Matrix Code:</label>
+            <input type="password" id="password" placeholder="Enter password">
             <button onclick="checkPassword()">Submit</button>
+            <div id="white-rabbit"></div>
         </div>
     </div>
-
-    <div id="chat-popup" class="chat-popup">
-        <div class="chat-area" id="chatArea"></div>
-        <input type="text" id="messageInput" placeholder="Type a message...">
-        <button onclick="sendMessage()">Send</button>
-    </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
