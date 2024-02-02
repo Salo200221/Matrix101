@@ -10,15 +10,18 @@
     <div class="matrix-bg">
         <div class="container">
             <h1>Welcome to the Matrix</h1>
-            <form id="passwordForm">
-                <label for="password">Enter the Matrix Password:</label>
-                <input type="password" id="password" required>
-                <button type="button" onclick="checkPassword()">Enter</button>
-            </form>
+            <p>Please enter the code:</p>
+            <input type="password" id="passwordInput" placeholder="Enter code">
+            <button onclick="checkPassword()">Submit</button>
         </div>
     </div>
 
-    <!-- Include the Live Chat script -->
-    <script src="livechat.js"></script>
+    <div id="chat-popup" class="chat-popup">
+        <div class="chat-area" id="chatArea"></div>
+        <input type="text" id="messageInput" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
