@@ -1,40 +1,62 @@
 body {
     margin: 0;
+    padding: 0;
     font-family: 'Arial', sans-serif;
 }
 
 .matrix-bg {
-    background: url('matrix-background.jpg') no-repeat center center fixed;
-    background-size: cover;
+    background: #000;
+    color: #00FF00;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
 .container {
     text-align: center;
-    color: white;
 }
 
-#chat-popup {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    right: 20px;
-    border: 1px solid #ccc;
-    width: 300px;
+h1 {
+    font-size: 2em;
 }
 
-.chat-area {
-    height: 200px;
-    overflow: auto;
+#matrix-code {
+    font-size: 1.5em;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 1px solid #00FF00;
+    animation: matrix-code-animation 2s steps(40) infinite;
 }
 
-#messageInput {
-    width: 70%;
+@keyframes matrix-code-animation {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
 }
 
-button {
+label, input, button {
     margin-top: 10px;
+}
+
+#white-rabbit {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    position: relative;
+    animation: rabbit-animation 4s linear infinite;
+}
+
+@keyframes rabbit-animation {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: calc(100% - 50px);
+    }
 }
