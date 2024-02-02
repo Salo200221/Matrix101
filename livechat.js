@@ -1,15 +1,9 @@
 function checkPassword() {
-    var password = document.getElementById("passwordInput").value;
-    
-    if (password === "2000174786") {
-        document.getElementById("chat-popup").style.display = "block";
+    var enteredPassword = document.getElementById('password').value;
+    if (enteredPassword === '2000174786') {
+        // Hier könntest du die Logik für den Übergang zum Live-Chat hinzufügen
+        alert('Correct password! You are now entering the Live Chat.');
     } else {
-        alert("Incorrect code. Try again.");
+        alert('Incorrect password. Try again.');
     }
-}
-
-function sendMessage() {
-    var message = document.getElementById("messageInput").value;
-    document.getElementById("chatArea").innerHTML += "<p>You: " + message + "</p>";
-    document.getElementById("messageInput").value = "";
 }
