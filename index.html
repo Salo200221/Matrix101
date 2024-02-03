@@ -11,8 +11,8 @@
             padding: 0;
             font-family: 'Courier New', monospace;
             overflow: hidden;
-            background: #000; /* Set the background color here */
-            transition: background 1s ease; /* Add transition for background color */
+            background: #000;
+            transition: background 1s ease;
         }
 
         #matrix-container {
@@ -53,17 +53,17 @@
             margin-top: 20px;
             text-align: center;
             display: none;
+            color: #00FF00;
         }
 
         .matrix-text {
             font-size: 1.2em;
             white-space: pre-line;
             line-height: 1.5;
-            color: #00FF00;
             overflow: hidden;
             border-right: 1px solid #00FF00;
             padding-right: 10px;
-            animation: typing 2s steps(30, end);
+            animation: typing 5s steps(30, end) forwards;
         }
 
         @keyframes typing {
@@ -89,11 +89,7 @@
             </div>
 
             <div id="hidden-content">
-                <p class="matrix-text" id="matrix-message">
-                    Nothing is as it seems, Philipp...<br>
-                    The Matrix is a system. This system is our enemy.<br>
-                    But when you're inside, look around, what do you see?
-                </p>
+                <p class="matrix-text" id="matrix-message"></p>
             </div>
         </div>
     </div>
@@ -160,6 +156,7 @@
 
         function showHiddenContent() {
             document.getElementById('hidden-content').style.display = 'block';
+            document.getElementById('matrix-message').innerHTML = "Nothing is as it seems, Philipp...<br>The Matrix is a system. This system is our enemy.<br>But when you're inside, look around, what do you see?";
         }
     </script>
 </body>
