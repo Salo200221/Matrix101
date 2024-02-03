@@ -51,7 +51,7 @@
 
             for (let i = 0; i < columns; i++) {
                 let text = str[Math.floor(Math.random() * str.length)];
-                output += text;
+                output += `<span style="opacity: ${1 / drops[i]}">${text}</span>`;
 
                 if (drops[i] * font > window.innerHeight && Math.random() > 0.975) {
                     drops[i] = 0;
