@@ -13,19 +13,7 @@
             background-color: black;
             color: #00FF00;
             font-family: 'Courier New', monospace;
-        }
-
-        .matrix-bg {
-            background: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-
-        .container {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
@@ -33,76 +21,37 @@
     </style>
 </head>
 <body>
-    <div class="matrix-bg" id="matrix-bg"></div>
-    <div class="container">
-        <h1>Welcome to the Matrix</h1>
-        <label for="password">Enter the Matrix Code:</label>
-        <input type="password" id="password" placeholder="Enter password">
-        <button onclick="checkPassword()">Submit</button>
-        <div id="hidden-content" style="display: none;">
-            <p class="matrix-text">
-                Nothing is as it seems, Philipp...<br>
-                The Matrix is a system. This system is our enemy.<br>
-                But when you're inside, look around, what do you see?
-            </p>
-        </div>
-    </div>
+    <div id="matrix"></div>
     <script>
-        let str = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
-        let font = 8;  // Adjusted font size for smaller screens
-        let columns = Math.floor(window.innerWidth / font);
-        let drops = [];
-
-        for (let i = 0; i < columns; i++) {
-            drops[i] = {
-                text: str[Math.floor(Math.random() * str.length)],
-                speed: Math.random() * 2 + 1,
-                position: Math.random() * window.innerHeight
-            };
-        }
+        const matrix = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
+        const font = 12;
+        const columns = Math.floor(window.innerWidth / font);
+        const drops = Array(columns).fill(0);
 
         function draw() {
-            let matrixBg = document.getElementById("matrix-bg");
-            matrixBg.innerHTML = ""; // Clear previous drops
+            let output = "";
 
             for (let i = 0; i < columns; i++) {
-                let drop = drops[i];
-                matrixBg.innerHTML += `<span style="position: absolute; top: ${drop.position}px; opacity: 0.5; font-size: ${font}px;">${drop.text}</span>`;
+                let text = matrix[Math.floor(Math.random() * matrix.length)];
+                output += `<span style="position: absolute; top: ${drops[i]}px; left: ${i * font}px;">${text}</span>`;
 
-                drop.position += drop.speed;
-
-                if (drop.position > window.innerHeight) {
-                    drop.position = 0;
+                if (drops[i] * font > window.innerHeight && Math.random() > 0.975) {
+                    drops[i] = 0;
                 }
+                drops[i]++;
             }
+
+            document.getElementById("matrix").innerHTML = output;
         }
 
         setInterval(draw, 100);
 
         window.addEventListener("resize", () => {
             columns = Math.floor(window.innerWidth / font);
-            drops = [];
             for (let i = 0; i < columns; i++) {
-                drops[i] = {
-                    text: str[Math.floor(Math.random() * str.length)],
-                    speed: Math.random() * 2 + 1,
-                    position: Math.random() * window.innerHeight
-                };
+                drops[i] = Math.floor(Math.random() * window.innerHeight);
             }
         });
-
-        function checkPassword() {
-            var enteredPassword = document.getElementById('password').value;
-            if (enteredPassword === '2000174786') {
-                showHiddenContent();
-            } else {
-                alert('Incorrect password. Try again.');
-            }
-        }
-
-        function showHiddenContent() {
-            document.getElementById('hidden-content').style.display = 'block';
-        }
     </script>
 </body>
 </html>
