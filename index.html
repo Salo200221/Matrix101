@@ -13,6 +13,10 @@
             background-color: black;
             color: #00FF00;
             font-family: 'Courier New', monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         .matrix-bg {
@@ -38,34 +42,27 @@
     </div>
     <script>
         let str = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
-        let matrix = str.split("");
         let font = 12;
         let columns = Math.floor(window.innerWidth / font);
-        let drops = [];
-
-        for (let i = 0; i < columns; i++) {
-            drops[i] = Math.floor(Math.random() * window.innerHeight);
-        }
+        let drops = Array(columns).fill(1);
 
         function draw() {
-            let ctx = document.body.getContext("2d");
-            ctx.fillStyle = "rgba(0,0,0,0.05)";
-            ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
-            ctx.fillStyle = "#00FF00";
-            ctx.font = `${font}px system-ui`;
+            let output = "";
 
-            for (let i = 0; i < drops.length; i++) {
-                let text = matrix[Math.floor(Math.random() * matrix.length)];
-                ctx.fillText(text, i * font, drops[i] * font);
+            for (let i = 0; i < columns; i++) {
+                let text = str[Math.floor(Math.random() * str.length)];
+                output += text;
 
                 if (drops[i] * font > window.innerHeight && Math.random() > 0.975) {
                     drops[i] = 0;
                 }
                 drops[i]++;
             }
+
+            document.body.innerHTML = output;
         }
 
-        setInterval(draw, 20);
+        setInterval(draw, 100);
 
         window.addEventListener("resize", () => {
             columns = Math.floor(window.innerWidth / font);
