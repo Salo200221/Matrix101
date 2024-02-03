@@ -37,3 +37,29 @@ label, input, button {
     white-space: pre-line;
     line-height: 1.5;
 }
+
+.matrix-text {
+    font-size: 1.2em;
+    white-space: pre-line;
+    line-height: 1.5;
+    color: #00FF00;
+}
+
+#hidden-content img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+#binary-code {
+    font-family: monospace;
+    font-size: 1.2em;
+    color: #00FF00;
+}
+
+#message {
+    margin-top: 20px;
+    font-style: italic;
+    font-size: 1.2em;
+    color: #00FF00;
+}
