@@ -13,35 +13,38 @@
             overflow: hidden;
         }
 
+        #matrix-container {
+            position: relative;
+            height: 100vh;
+            background: #000;
+            color: #00FF00;
+        }
+
         #matrix {
             position: absolute;
             top: 0;
             left: 0;
             pointer-events: none;
-            z-index: 1; /* Matrix-Effekt im Hintergrund */
         }
 
         .matrix-bg {
-            background: #000;
-            color: #00FF00;
-            height: 100vh;
+            position: relative;
+            z-index: 2; /* Set higher z-index here */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-        }
-
-        .container {
-            text-align: center;
+            height: 100%;
         }
 
         h1 {
             font-size: 2em;
+            margin-bottom: 20px; /* Adjust margin as needed */
         }
 
-        label, input, button {
-            margin-top: 10px;
+        #password-container {
+            z-index: 3; /* Set higher z-index here */
+            text-align: center;
         }
 
         #hidden-content {
@@ -53,27 +56,21 @@
             font-size: 1.2em;
             white-space: pre-line;
             line-height: 1.5;
-            color: #00FF00;
-        }
-
-        #password-container {
-            position: absolute;
-            z-index: 2; /* Passwort-Eingabefeld im Vordergrund */
         }
     </style>
 </head>
 <body>
-    <div id="password-container">
-        <label for="password">Enter the Matrix Code:</label>
-        <input type="password" id="password" placeholder="Enter password">
-        <button onclick="checkPassword()">Submit</button>
-    </div>
+    <div id="matrix-container">
+        <div id="matrix"></div>
 
-    <div id="matrix"></div>
-
-    <div class="matrix-bg">
-        <div class="container">
+        <div class="matrix-bg">
             <h1>Welcome to the Matrix</h1>
+            <div id="password-container"> <!-- Set higher z-index here -->
+                <label for="password">Enter the Matrix Code:</label>
+                <input type="password" id="password" placeholder="Enter password">
+                <button onclick="checkPassword()">Submit</button>
+            </div>
+
             <div id="hidden-content" style="display: none;">
                 <p class="matrix-text">
                     Nothing is as it seems, Philipp...<br>
