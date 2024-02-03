@@ -28,6 +28,7 @@
         const columns = Math.floor(window.innerWidth / font);
         const rows = Math.floor(window.innerHeight / font);
         const drops = Array.from({ length: columns }, () => Math.floor(Math.random() * rows));
+        const resetInterval = 5000; // Reset every 5 seconds
 
         function draw() {
             let output = "";
@@ -36,8 +37,8 @@
                 let text = matrix[Math.floor(Math.random() * matrix.length)];
                 output += `<span style="position: absolute; top: ${drops[i] * font}px; left: ${i * font}px;">${text}</span>`;
 
-                if (drops[i] * font > window.innerHeight && Math.random() > 0.975) {
-                    drops[i] = 0;
+                if (drops[i] * font > window.innerHeight || Math.random() > 0.98) {
+                    drops[i] = Math.floor(Math.random() * rows);
                 }
                 drops[i] += Math.floor(Math.random() * 3); // Increase falling speed
             }
@@ -54,6 +55,12 @@
                 drops[i] = Math.floor(Math.random() * rows);
             }
         });
+
+        setInterval(() => {
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.floor(Math.random() * rows);
+            }
+        }, resetInterval);
     </script>
 </body>
 </html>
