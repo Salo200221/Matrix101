@@ -27,14 +27,15 @@
         const font = 16;
         const columns = Math.floor(window.innerWidth / font);
         const rows = Math.floor(window.innerHeight / font);
-        const drops = Array.from({ length: columns * 5 }, () => ({ position: 0, column: Math.floor(Math.random() * columns), opacity: Math.random() }));
-        const fallSpeed = 5; // Adjust the falling speed
+        const numberOfDrops = 100; // Adjust the number of drops
+        const drops = Array.from({ length: columns * numberOfDrops }, () => ({ position: 0, column: Math.floor(Math.random() * columns), opacity: Math.random() }));
+        const fallSpeed = 5;
         const fadeSpeed = 0.005;
 
         function draw() {
             let output = "";
 
-            for (let i = 0; i < columns * 5; i++) {
+            for (let i = 0; i < columns * numberOfDrops; i++) {
                 let text = matrix[Math.floor(Math.random() * matrix.length)];
                 output += `<span style="position: absolute; top: ${drops[i].position}px; left: ${drops[i].column * font}px; opacity: ${drops[i].opacity}; font-size: ${font}px;">${text}</span>`;
 
@@ -44,7 +45,7 @@
                     drops[i].opacity = Math.random();
                 }
 
-                drops[i].position += fallSpeed; // Increase falling speed
+                drops[i].position += fallSpeed;
                 drops[i].opacity -= fadeSpeed;
 
                 if (drops[i].opacity < 0) {
@@ -55,12 +56,12 @@
             document.getElementById("matrix").innerHTML = output;
         }
 
-        setInterval(draw, 30); // Adjust the interval for faster fall
+        setInterval(draw, 30);
 
         window.addEventListener("resize", () => {
             columns = Math.floor(window.innerWidth / font);
             rows = Math.floor(window.innerHeight / font);
-            for (let i = 0; i < columns * 5; i++) {
+            for (let i = 0; i < columns * numberOfDrops; i++) {
                 drops[i] = { position: 0, column: Math.floor(Math.random() * columns), opacity: Math.random() };
             }
         });
