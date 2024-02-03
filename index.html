@@ -6,9 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matrix</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Setze den z-index auf -1 */
+        }
+    </style>
 </head>
 <body>
-    <canvas style="position: fixed; top: 0; left: 0;"></canvas>
+    <canvas></canvas>
     <div class="matrix-bg">
         <div class="container">
             <h1>Welcome to the Matrix</h1>
