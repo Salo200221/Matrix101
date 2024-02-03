@@ -26,14 +26,15 @@
         const matrix = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
         const font = 12;
         const columns = Math.floor(window.innerWidth / font);
-        const drops = Array.from({ length: columns }, () => Math.floor(Math.random() * window.innerHeight));
+        const rows = Math.floor(window.innerHeight / font);
+        const drops = Array.from({ length: columns }, () => Math.floor(Math.random() * rows));
 
         function draw() {
             let output = "";
 
             for (let i = 0; i < columns; i++) {
                 let text = matrix[Math.floor(Math.random() * matrix.length)];
-                output += `<span style="position: absolute; top: ${drops[i]}px; left: ${i * font}px;">${text}</span>`;
+                output += `<span style="position: absolute; top: ${drops[i] * font}px; left: ${i * font}px;">${text}</span>`;
 
                 if (drops[i] * font > window.innerHeight && Math.random() > 0.975) {
                     drops[i] = 0;
@@ -48,8 +49,9 @@
 
         window.addEventListener("resize", () => {
             columns = Math.floor(window.innerWidth / font);
+            rows = Math.floor(window.innerHeight / font);
             for (let i = 0; i < columns; i++) {
-                drops[i] = Math.floor(Math.random() * window.innerHeight);
+                drops[i] = Math.floor(Math.random() * rows);
             }
         });
     </script>
