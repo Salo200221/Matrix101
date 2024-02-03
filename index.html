@@ -26,23 +26,22 @@
         const matrix = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
         const font = 12;
         const columns = Math.floor(window.innerWidth / font);
-        const rows = Math.floor(window.innerHeight / font);
-        const drops = Array.from({ length: columns }, () => ({ position: Math.floor(Math.random() * rows), opacity: 1 }));
-        const fadeSpeed = 0.02;
+        const drops = Array.from({ length: columns * 2 }, () => ({ position: Math.floor(Math.random() * window.innerHeight), opacity: 1 }));
+        const fadeSpeed = 0.01;
 
         function draw() {
             let output = "";
 
-            for (let i = 0; i < columns; i++) {
+            for (let i = 0; i < columns * 2; i++) {
                 let text = matrix[Math.floor(Math.random() * matrix.length)];
-                output += `<span style="position: absolute; top: ${drops[i].position * font}px; left: ${i * font}px; opacity: ${drops[i].opacity};">${text}</span>`;
+                output += `<span style="position: absolute; top: ${drops[i].position}px; left: ${i * (font / 2)}px; opacity: ${drops[i].opacity};">${text}</span>`;
 
-                if (drops[i].position * font > window.innerHeight || Math.random() > 0.98) {
+                if (drops[i].position > window.innerHeight || Math.random() > 0.98) {
                     drops[i].position = 0;
                     drops[i].opacity = 1;
                 }
 
-                drops[i].position += Math.floor(Math.random() * 3) + 1; // Increase falling speed
+                drops[i].position += Math.floor(Math.random() * 2) + 1; // Increase falling speed
                 drops[i].opacity -= fadeSpeed;
 
                 if (drops[i].opacity < 0) {
@@ -53,13 +52,12 @@
             document.getElementById("matrix").innerHTML = output;
         }
 
-        setInterval(draw, 100);
+        setInterval(draw, 50);
 
         window.addEventListener("resize", () => {
             columns = Math.floor(window.innerWidth / font);
-            rows = Math.floor(window.innerHeight / font);
-            for (let i = 0; i < columns; i++) {
-                drops[i] = { position: Math.floor(Math.random() * rows), opacity: 1 };
+            for (let i = 0; i < columns * 2; i++) {
+                drops[i] = { position: Math.floor(Math.random() * window.innerHeight), opacity: 1 };
             }
         });
     </script>
