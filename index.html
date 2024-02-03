@@ -10,6 +10,14 @@
             margin: 0;
             padding: 0;
             font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+
+        #matrix {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
         }
 
         .matrix-bg {
@@ -49,6 +57,7 @@
     </style>
 </head>
 <body>
+    <div id="matrix"></div>
     <div class="matrix-bg">
         <div class="container">
             <h1>Welcome to the Matrix</h1>
@@ -66,6 +75,47 @@
     </div>
 
     <script>
+        const matrix = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
+        const font = 16;
+        let columns = Math.floor(window.innerWidth / font);
+        const numberOfDrops = 200; // Adjust the number of drops
+        const drops = Array.from({ length: columns * numberOfDrops }, () => ({ position: 0, column: Math.floor(Math.random() * columns), opacity: Math.random() }));
+        const fallSpeed = 5;
+        const fadeSpeed = 0.005;
+
+        function draw() {
+            let output = "";
+
+            for (let i = 0; i < columns * numberOfDrops; i++) {
+                let text = matrix[Math.floor(Math.random() * matrix.length)];
+                output += `<span style="position: absolute; top: ${drops[i].position}px; left: ${drops[i].column * font}px; opacity: ${drops[i].opacity}; font-size: ${font}px; color: #00FF00;">${text}</span>`;
+
+                if (drops[i].position > window.innerHeight || Math.random() > 0.98) {
+                    drops[i].position = 0;
+                    drops[i].column = Math.floor(Math.random() * columns);
+                    drops[i].opacity = Math.random();
+                }
+
+                drops[i].position += fallSpeed;
+                drops[i].opacity -= fadeSpeed;
+
+                if (drops[i].opacity < 0) {
+                    drops[i].opacity = 0;
+                }
+            }
+
+            document.getElementById("matrix").innerHTML = output;
+        }
+
+        setInterval(draw, 30);
+
+        window.addEventListener("resize", () => {
+            columns = Math.floor(window.innerWidth / font);
+            for (let i = 0; i < columns * numberOfDrops; i++) {
+                drops[i] = { position: 0, column: Math.floor(Math.random() * columns), opacity: Math.random() };
+            }
+        });
+
         function checkPassword() {
             var enteredPassword = document.getElementById('password').value;
             if (enteredPassword === '2000174786') {
