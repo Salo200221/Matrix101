@@ -26,7 +26,7 @@
         const matrix = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
         const font = 16;
         const columns = Math.floor(window.innerWidth / font);
-        const drops = Array.from({ length: columns * 2 }, () => ({ position: Math.floor(Math.random() * window.innerHeight), opacity: 1 }));
+        const drops = Array.from({ length: columns * 2 }, () => ({ position: Math.random() * window.innerHeight, opacity: 1 }));
         const fadeSpeed = 0.005;
 
         function draw() {
@@ -41,7 +41,7 @@
                     drops[i].opacity = 1;
                 }
 
-                drops[i].position += Math.floor(Math.random() * 2) + 1; // Increase falling speed
+                drops[i].position += Math.floor(Math.random() * 3) + 1; // Increase falling speed
                 drops[i].opacity -= fadeSpeed;
 
                 if (drops[i].opacity < 0) {
@@ -57,7 +57,7 @@
         window.addEventListener("resize", () => {
             columns = Math.floor(window.innerWidth / font);
             for (let i = 0; i < columns * 2; i++) {
-                drops[i] = { position: Math.floor(Math.random() * window.innerHeight), opacity: 1 };
+                drops[i] = { position: Math.random() * window.innerHeight, opacity: 1 };
             }
         });
     </script>
