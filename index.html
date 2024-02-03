@@ -22,6 +22,14 @@
             left: 0;
             pointer-events: none;
         }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
     </style>
 </head>
 <body>
@@ -41,14 +49,14 @@
     </div>
     <script>
         let str = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
-        let font = 12;
+        let font = 8;  // Adjusted font size for smaller screens
         let columns = Math.floor(window.innerWidth / font);
         let drops = [];
 
         for (let i = 0; i < columns; i++) {
             drops[i] = {
                 text: str[Math.floor(Math.random() * str.length)],
-                speed: Math.random() * 2 + 1,  // Random speed for variety
+                speed: Math.random() * 2 + 1,
                 position: Math.random() * window.innerHeight
             };
         }
@@ -59,7 +67,7 @@
 
             for (let i = 0; i < columns; i++) {
                 let drop = drops[i];
-                matrixBg.innerHTML += `<span style="position: absolute; top: ${drop.position}px; opacity: 0.5">${drop.text}</span>`;
+                matrixBg.innerHTML += `<span style="position: absolute; top: ${drop.position}px; opacity: 0.5; font-size: ${font}px;">${drop.text}</span>`;
 
                 drop.position += drop.speed;
 
