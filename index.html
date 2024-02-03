@@ -11,12 +11,13 @@
             padding: 0;
             font-family: 'Courier New', monospace;
             overflow: hidden;
+            background: #000; /* Set the background color here */
+            transition: background 1s ease; /* Add transition for background color */
         }
 
         #matrix-container {
             position: relative;
             height: 100vh;
-            background: #000;
             color: #00FF00;
         }
 
@@ -151,6 +152,7 @@
         function fadeOutMatrix() {
             document.getElementById('matrix-container').style.opacity = '0';
             setTimeout(() => {
+                document.body.style.background = '#000';
                 document.getElementById('matrix-container').style.display = 'none';
                 showHiddenContent();
             }, 1000);
@@ -162,4 +164,3 @@
     </script>
 </body>
 </html>
-``
