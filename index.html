@@ -18,6 +18,7 @@
             top: 0;
             left: 0;
             pointer-events: none;
+            z-index: 1; /* Matrix-Effekt im Hintergrund */
         }
 
         .matrix-bg {
@@ -54,16 +55,25 @@
             line-height: 1.5;
             color: #00FF00;
         }
+
+        #password-container {
+            position: absolute;
+            z-index: 2; /* Passwort-Eingabefeld im Vordergrund */
+        }
     </style>
 </head>
 <body>
+    <div id="password-container">
+        <label for="password">Enter the Matrix Code:</label>
+        <input type="password" id="password" placeholder="Enter password">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+
     <div id="matrix"></div>
+
     <div class="matrix-bg">
         <div class="container">
             <h1>Welcome to the Matrix</h1>
-            <label for="password">Enter the Matrix Code:</label>
-            <input type="password" id="password" placeholder="Enter password">
-            <button onclick="checkPassword()">Submit</button>
             <div id="hidden-content" style="display: none;">
                 <p class="matrix-text">
                     Nothing is as it seems, Philipp...<br>
