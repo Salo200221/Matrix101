@@ -24,17 +24,17 @@
     <div id="matrix"></div>
     <script>
         const matrix = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
-        const font = 12;
+        const font = 16;
         const columns = Math.floor(window.innerWidth / font);
         const drops = Array.from({ length: columns * 2 }, () => ({ position: Math.floor(Math.random() * window.innerHeight), opacity: 1 }));
-        const fadeSpeed = 0.01;
+        const fadeSpeed = 0.005;
 
         function draw() {
             let output = "";
 
             for (let i = 0; i < columns * 2; i++) {
                 let text = matrix[Math.floor(Math.random() * matrix.length)];
-                output += `<span style="position: absolute; top: ${drops[i].position}px; left: ${i * (font / 2)}px; opacity: ${drops[i].opacity};">${text}</span>`;
+                output += `<span style="position: absolute; top: ${drops[i].position}px; left: ${i * (font / 2)}px; opacity: ${drops[i].opacity}; font-size: ${font}px;">${text}</span>`;
 
                 if (drops[i].position > window.innerHeight || Math.random() > 0.98) {
                     drops[i].position = 0;
