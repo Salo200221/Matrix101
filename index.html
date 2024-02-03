@@ -12,6 +12,7 @@
             overflow: hidden; /* Verhindert den Standard-Scrollbar */
             background-color: black; /* Setzt den Hintergrund auf Schwarz */
             color: #00FF00; /* Setzt die Textfarbe auf Grün */
+            font-family: 'Courier New', monospace; /* Verwendet eine Monospace-Schriftart für den Matrix-Effekt */
         }
 
         canvas {
@@ -50,52 +51,4 @@
         let height = canvas.height = window.innerHeight;
         let str = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
         let matrix = str.split("");
-        let font = 12;
-        let col = width / font;
-        let arr = [];
-        let passwordEntered = false;
-        let matrixEffectPaused = false;
-
-        for (let i = 0; i < col; i++) {
-            arr[i] = 1;
-        }
-
-        const draw = () => {
-            if (passwordEntered && !matrixEffectPaused) {
-                ctx.fillStyle = "rgba(0,0,0,0.05)";
-                ctx.fillRect(0, 0, width, height);
-                ctx.font = `${font}px system-ui`;
-
-                for (let i = 0; i < arr.length; i++) {
-                    let txt = matrix[Math.floor(Math.random() * matrix.length)];
-                    ctx.fillText(txt, i * font, arr[i] * font);
-
-                    if (arr[i] * font > height && Math.random() > 0.975) {
-                        arr[i] = 0;
-                    }
-                    arr[i]++;
-                }
-            }
-        };
-
-        setInterval(draw, 20);
-
-        window.addEventListener("resize", () => location.reload());
-
-        function checkPassword() {
-            var enteredPassword = document.getElementById('password').value;
-            if (enteredPassword === '2000174786') {
-                passwordEntered = true;
-                matrixEffectPaused = true;
-                showHiddenContent();
-            } else {
-                alert('Incorrect password. Try again.');
-            }
-        }
-
-        function showHiddenContent() {
-            document.getElementById('hidden-content').style.display = 'block';
-        }
-    </script>
-</body>
-</html>
+       ⬤
