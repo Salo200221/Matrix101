@@ -8,51 +8,163 @@
     <style>
         body {
             margin: 0;
+            padding: 0;
+            font-family: 'Courier New', monospace;
             overflow: hidden;
             background: #000;
+            color: #00FF00;
+            transition: background 1s ease, color 1s ease;
+        }
+
+        #matrix-container {
+            position: relative;
+            height: 100vh;
             color: #00FF00;
         }
 
         #matrix {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
-            font-family: 'Courier New', monospace;
+            pointer-events: none;
+        }
+
+        .matrix-bg {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #password-container {
+            z-index: 3;
+            text-align: center;
+        }
+
+        #hidden-content {
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+            background: #000;
+            color: #00FF00;
+        }
+
+        .matrix-text {
+            font-size: 1.2em;
+            white-space: pre-line;
+            line-height: 1.5;
+            overflow: hidden;
+            border-right: 1px solid #00FF00;
+            padding-right: 10px;
+            animation: typing 5s steps(30, end) forwards;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="matrix"></div>
+    <div id="matrix-container">
+        <div id="matrix"></div>
+
+        <div class="matrix-bg">
+            <h1>Welcome to the Matrix</h1>
+            <div id="password-container">
+                <label for="password">Enter the Matrix Code:</label>
+                <input type="password" id="password" placeholder="Enter password">
+                <button onclick="checkPassword()">Submit</button>
+            </div>
+
+            <div id="hidden-content">
+                <p class="matrix-text" id="matrix-message"></p>
+            </div>
+        </div>
+    </div>
 
     <script>
         const matrix = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
         const font = 16;
-        const columns = Math.floor(window.innerWidth / font);
-        const drops = Array.from({ length: columns }, () => ({ position: 0, opacity: Math.random() }));
+        let columns = Math.floor(window.innerWidth / font);
+        const numberOfDrops = 200;
+        const drops = Array.from({ length: columns * numberOfDrops }, () => ({ position: 0, column: Math.floor(Math.random() * columns), opacity: Math.random() }));
+        const fallSpeed = 5;
+        const fadeSpeed = 0.005;
 
         function draw() {
             let output = "";
 
-            for (let i = 0; i < columns; i++) {
+            for (let i = 0; i < columns * numberOfDrops; i++) {
                 let text = matrix[Math.floor(Math.random() * matrix.length)];
-                output += `<span style="position: absolute; top: ${drops[i].position}px; left: ${i * font}px; opacity: ${drops[i].opacity}; font-size: ${font}px;">${text}</span>`;
+                output += `<span style="position: absolute; top: ${drops[i].position}px; left: ${drops[i].column * font}px; opacity: ${drops[i].opacity}; font-size: ${font}px; color: #00FF00;">${text}</span>`;
 
                 if (drops[i].position > window.innerHeight || Math.random() > 0.98) {
                     drops[i].position = 0;
+                    drops[i].column = Math.floor(Math.random() * columns);
                     drops[i].opacity = Math.random();
                 }
 
-                drops[i].position += 5; // Fallgeschwindigkeit anpassen
+                drops[i].position += fallSpeed;
+                drops[i].opacity -= fadeSpeed;
+
+                if (drops[i].opacity < 0) {
+                    drops[i].opacity = 0;
+                }
             }
 
             document.getElementById("matrix").innerHTML = output;
         }
 
         setInterval(draw, 30);
+        initializeMatrix();
 
         window.addEventListener("resize", () => {
             columns = Math.floor(window.innerWidth / font);
+            initializeMatrix();
         });
+
+        function initializeMatrix() {
+            for (let i = 0; i < columns * numberOfDrops; i++) {
+                drops[i] = { position: Math.random() * window.innerHeight, column: Math.floor(Math.random() * columns), opacity: Math.random() };
+            }
+        }
+
+        function checkPassword() {
+            var enteredPassword = document.getElementById('password').value;
+            if (enteredPassword === '2000174786') {
+                fadeOutMatrix();
+            } else {
+                alert('Incorrect password. Try again.');
+            }
+        }
+
+        function fadeOutMatrix() {
+            document.getElementById('matrix-container').style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.background = '#000';
+                document.getElementById('matrix-container').style.display = 'none';
+                showHiddenContent();
+            }, 1000);
+        }
+
+        function showHiddenContent() {
+            document.getElementById('hidden-content').style.display = 'block';
+            document.getElementById('matrix-message').innerHTML = "Nothing is as it seems, Philipp...<br>The Matrix is a system. This system is our enemy.<br>But when you're inside, look around, what do you see?";
+        }
     </script>
 </body>
 </html>
