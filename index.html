@@ -18,7 +18,6 @@
             top: 0;
             left: 0;
             pointer-events: none;
-            z-index: 1; /* Matrix-Effekt im Hintergrund */
         }
 
         .matrix-bg {
@@ -138,6 +137,9 @@
         function showHiddenContent() {
             document.getElementById('hidden-content').style.display = 'block';
         }
+
+        // Set z-index for matrix element
+        document.getElementById('matrix').style.zIndex = 1;
     </script>
 </body>
 </html>
