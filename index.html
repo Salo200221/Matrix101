@@ -35,13 +35,14 @@
         let col = width / font;
         let arr = [];
         let passwordEntered = false;
+        let matrixEffectPaused = false;
 
         for (let i = 0; i < col; i++) {
             arr[i] = 1;
         }
 
         const draw = () => {
-            if (passwordEntered) {
+            if (passwordEntered && !matrixEffectPaused) {
                 ctx.fillStyle = "rgba(0,0,0,0.05)";
                 ctx.fillRect(0, 0, width, height);
                 ctx.fillStyle = "#00FF00";
@@ -67,6 +68,7 @@
             var enteredPassword = document.getElementById('password').value;
             if (enteredPassword === '2000174786') {
                 passwordEntered = true;
+                matrixEffectPaused = true; // Pausiere den Matrix-Effekt
                 showHiddenContent();
             } else {
                 alert('Incorrect password. Try again.');
