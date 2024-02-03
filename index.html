@@ -11,6 +11,7 @@
             margin: 0;
             overflow: hidden; /* Verhindert den Standard-Scrollbar */
             background-color: black; /* Setzt den Hintergrund auf Schwarz */
+            color: #00FF00; /* Setzt die Textfarbe auf Grün */
         }
 
         canvas {
@@ -61,9 +62,8 @@
 
         const draw = () => {
             if (passwordEntered && !matrixEffectPaused) {
-                ctx.fillStyle = "rgba(0,0,0,0.02)"; /* Reduziere die Transparenz */
+                ctx.fillStyle = "rgba(0,0,0,0.05)";
                 ctx.fillRect(0, 0, width, height);
-                ctx.fillStyle = "#00FF00";
                 ctx.font = `${font}px system-ui`;
 
                 for (let i = 0; i < arr.length; i++) {
