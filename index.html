@@ -11,12 +11,39 @@
             margin: 0;
             overflow: hidden;
             background-color: black;
-            color: #00FF00;
+            color: #008000; /* Dunkelgrüne Schriftfarbe (#008000) */
             font-family: 'Courier New', monospace;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
+        }
+
+        .matrix-bg {
+            background: none;
+        }
+
+        .container h1 {
+            font-size: 2em;
+            color: #008000; /* Dunkelgrüne Schriftfarbe (#008000) */
+        }
+
+        label, input, button {
+            margin-top: 10px;
+            color: #008000; /* Dunkelgrüne Schriftfarbe (#008000) */
+        }
+
+        #hidden-content {
+            margin-top: 20px;
+            text-align: center;
+            color: #008000; /* Dunkelgrüne Schriftfarbe (#008000) */
+        }
+
+        .matrix-text {
+            font-size: 1.2em;
+            white-space: pre-line;
+            line-height: 1.5;
+            color: #008000; /* Dunkelgrüne Schriftfarbe (#008000) */
         }
     </style>
 </head>
@@ -52,7 +79,7 @@
 
             for (let i = 0; i < columns * numberOfDrops; i++) {
                 let text = matrix[Math.floor(Math.random() * matrix.length)];
-                output += `<span style="position: absolute; top: ${drops[i].position}px; left: ${drops[i].column * font}px; opacity: ${drops[i].opacity}; font-size: ${font}px;">${text}</span>`;
+                output += `<span style="position: absolute; top: ${drops[i].position}px; left: ${drops[i].column * font}px; opacity: ${drops[i].opacity}; font-size: ${font}px; color: #008000;">${text}</span>`;
 
                 if (drops[i].position > window.innerHeight || Math.random() > 0.98) {
                     drops[i].position = 0;
