@@ -29,7 +29,7 @@
 
         .matrix-bg {
             position: relative;
-            z-index: 2; /* Set higher z-index here */
+            z-index: 2;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -39,24 +39,39 @@
 
         h1 {
             font-size: 2em;
-            margin-bottom: 20px; /* Adjust margin as needed */
-            text-align: center; /* Center-align the text */
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         #password-container {
-            z-index: 3; /* Set higher z-index here */
+            z-index: 3;
             text-align: center;
         }
 
         #hidden-content {
             margin-top: 20px;
             text-align: center;
+            display: none;
         }
 
         .matrix-text {
             font-size: 1.2em;
             white-space: pre-line;
             line-height: 1.5;
+            color: #00FF00;
+            overflow: hidden;
+            border-right: 1px solid #00FF00;
+            padding-right: 10px;
+            animation: typing 2s steps(30, end);
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -66,14 +81,14 @@
 
         <div class="matrix-bg">
             <h1>Welcome to the Matrix</h1>
-            <div id="password-container"> <!-- Set higher z-index here -->
+            <div id="password-container">
                 <label for="password">Enter the Matrix Code:</label>
                 <input type="password" id="password" placeholder="Enter password">
                 <button onclick="checkPassword()">Submit</button>
             </div>
 
-            <div id="hidden-content" style="display: none;">
-                <p class="matrix-text">
+            <div id="hidden-content">
+                <p class="matrix-text" id="matrix-message">
                     Nothing is as it seems, Philipp...<br>
                     The Matrix is a system. This system is our enemy.<br>
                     But when you're inside, look around, what do you see?
@@ -86,7 +101,7 @@
         const matrix = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
         const font = 16;
         let columns = Math.floor(window.innerWidth / font);
-        const numberOfDrops = 200; // Adjust the number of drops
+        const numberOfDrops = 200;
         const drops = Array.from({ length: columns * numberOfDrops }, () => ({ position: 0, column: Math.floor(Math.random() * columns), opacity: Math.random() }));
         const fallSpeed = 5;
         const fadeSpeed = 0.005;
@@ -127,10 +142,18 @@
         function checkPassword() {
             var enteredPassword = document.getElementById('password').value;
             if (enteredPassword === '2000174786') {
-                showHiddenContent();
+                fadeOutMatrix();
             } else {
                 alert('Incorrect password. Try again.');
             }
+        }
+
+        function fadeOutMatrix() {
+            document.getElementById('matrix-container').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('matrix-container').style.display = 'none';
+                showHiddenContent();
+            }, 1000);
         }
 
         function showHiddenContent() {
@@ -139,3 +162,4 @@
     </script>
 </body>
 </html>
+``
