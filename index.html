@@ -13,6 +13,13 @@
             overflow: hidden;
         }
 
+        #matrix-container {
+            position: relative;
+            height: 100vh;
+            background: #000;
+            color: #00FF00;
+        }
+
         #matrix {
             position: absolute;
             top: 0;
@@ -21,20 +28,13 @@
         }
 
         .matrix-bg {
-            background: #000;
-            color: #00FF00;
-            height: 100vh;
+            position: relative;
+            z-index: 2; /* Set higher z-index here */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            position: relative; /* Set position to relative for absolute positioning of password container */
-        }
-
-        .container {
-            text-align: center;
-            position: relative; /* Set position to relative for absolute positioning of password container */
+            height: 100%;
         }
 
         h1 {
@@ -45,6 +45,7 @@
             position: absolute;
             bottom: 20px; /* Adjust bottom position as needed */
             z-index: 3; /* Set higher z-index here */
+            text-align: center;
         }
 
         #hidden-content {
@@ -56,15 +57,14 @@
             font-size: 1.2em;
             white-space: pre-line;
             line-height: 1.5;
-            color: #00FF00;
         }
     </style>
 </head>
 <body>
-    <div id="matrix"></div>
+    <div id="matrix-container">
+        <div id="matrix"></div>
 
-    <div class="matrix-bg">
-        <div class="container">
+        <div class="matrix-bg">
             <h1>Welcome to the Matrix</h1>
             <div id="hidden-content" style="display: none;">
                 <p class="matrix-text">
@@ -136,6 +136,6 @@
         function showHiddenContent() {
             document.getElementById('hidden-content').style.display = 'block';
         }
-
-        // Set z-index for matrix element
-        document.getElementById('matrix').
+    </script>
+</body>
+</html>
