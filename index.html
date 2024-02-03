@@ -22,11 +22,26 @@
 </head>
 <body>
     <div id="matrix"></div>
+    <div class="matrix-bg">
+        <div class="container">
+            <h1>Welcome to the Matrix</h1>
+            <label for="password">Enter the Matrix Code:</label>
+            <input type="password" id="password" placeholder="Enter password">
+            <button onclick="checkPassword()">Submit</button>
+            <div id="hidden-content" style="display: none;">
+                <p class="matrix-text">
+                    Nothing is as it seems, Philipp...<br>
+                    The Matrix is a system. This system is our enemy.<br>
+                    But when you're inside, look around, what do you see?
+                </p>
+            </div>
+        </div>
+    </div>
+
     <script>
         const matrix = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
         const font = 16;
-        const columns = Math.floor(window.innerWidth / font);
-        const rows = Math.floor(window.innerHeight / font);
+        let columns = Math.floor(window.innerWidth / font);
         const numberOfDrops = 200; // Adjust the number of drops
         const drops = Array.from({ length: columns * numberOfDrops }, () => ({ position: 0, column: Math.floor(Math.random() * columns), opacity: Math.random() }));
         const fallSpeed = 5;
@@ -60,11 +75,23 @@
 
         window.addEventListener("resize", () => {
             columns = Math.floor(window.innerWidth / font);
-            rows = Math.floor(window.innerHeight / font);
             for (let i = 0; i < columns * numberOfDrops; i++) {
                 drops[i] = { position: 0, column: Math.floor(Math.random() * columns), opacity: Math.random() };
             }
         });
+
+        function checkPassword() {
+            var enteredPassword = document.getElementById('password').value;
+            if (enteredPassword === '2000174786') {
+                showHiddenContent();
+            } else {
+                alert('Incorrect password. Try again.');
+            }
+        }
+
+        function showHiddenContent() {
+            document.getElementById('hidden-content').style.display = 'block';
+        }
     </script>
 </body>
 </html>
