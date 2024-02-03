@@ -54,7 +54,6 @@
             margin-top: 20px;
             text-align: center;
             display: none;
-            background: #000;
             color: #00FF00;
         }
 
@@ -130,18 +129,13 @@
         }
 
         setInterval(draw, 30);
-        initializeMatrix();
 
         window.addEventListener("resize", () => {
             columns = Math.floor(window.innerWidth / font);
-            initializeMatrix();
-        });
-
-        function initializeMatrix() {
             for (let i = 0; i < columns * numberOfDrops; i++) {
-                drops[i] = { position: Math.random() * window.innerHeight, column: Math.floor(Math.random() * columns), opacity: Math.random() };
+                drops[i] = { position: 0, column: Math.floor(Math.random() * columns), opacity: Math.random() };
             }
-        }
+        });
 
         function checkPassword() {
             var enteredPassword = document.getElementById('password').value;
