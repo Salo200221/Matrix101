@@ -28,7 +28,8 @@
         const columns = Math.floor(window.innerWidth / font);
         const rows = Math.floor(window.innerHeight / font);
         const drops = Array.from({ length: columns * 5 }, () => ({ position: 0, column: Math.floor(Math.random() * columns), opacity: Math.random() }));
-        const fadeSpeed = 0.002;
+        const fallSpeed = 5; // Adjust the falling speed
+        const fadeSpeed = 0.005;
 
         function draw() {
             let output = "";
@@ -43,7 +44,7 @@
                     drops[i].opacity = Math.random();
                 }
 
-                drops[i].position += Math.floor(Math.random() * 3) + 1; // Increase falling speed
+                drops[i].position += fallSpeed; // Increase falling speed
                 drops[i].opacity -= fadeSpeed;
 
                 if (drops[i].opacity < 0) {
@@ -54,7 +55,7 @@
             document.getElementById("matrix").innerHTML = output;
         }
 
-        setInterval(draw, 50);
+        setInterval(draw, 30); // Adjust the interval for faster fall
 
         window.addEventListener("resize", () => {
             columns = Math.floor(window.innerWidth / font);
