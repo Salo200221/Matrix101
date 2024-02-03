@@ -29,18 +29,22 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            position: relative; /* Set position to relative for absolute positioning of password container */
         }
 
         .container {
             text-align: center;
+            position: relative; /* Set position to relative for absolute positioning of password container */
         }
 
         h1 {
             font-size: 2em;
         }
 
-        label, input, button {
-            margin-top: 10px;
+        #password-container {
+            position: absolute;
+            bottom: 20px; /* Adjust bottom position as needed */
+            z-index: 2; /* Passwort-Eingabefeld im Vordergrund */
         }
 
         #hidden-content {
@@ -54,20 +58,9 @@
             line-height: 1.5;
             color: #00FF00;
         }
-
-        #password-container {
-            position: absolute;
-            z-index: 2; /* Passwort-Eingabefeld im Vordergrund */
-        }
     </style>
 </head>
 <body>
-    <div id="password-container">
-        <label for="password">Enter the Matrix Code:</label>
-        <input type="password" id="password" placeholder="Enter password">
-        <button onclick="checkPassword()">Submit</button>
-    </div>
-
     <div id="matrix"></div>
 
     <div class="matrix-bg">
@@ -79,6 +72,12 @@
                     The Matrix is a system. This system is our enemy.<br>
                     But when you're inside, look around, what do you see?
                 </p>
+            </div>
+
+            <div id="password-container">
+                <label for="password">Enter the Matrix Code:</label>
+                <input type="password" id="password" placeholder="Enter password">
+                <button onclick="checkPassword()">Submit</button>
             </div>
         </div>
     </div>
