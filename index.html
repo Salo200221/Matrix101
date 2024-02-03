@@ -19,34 +19,16 @@
             left: 0;
             font-family: 'Courier New', monospace;
         }
-
-        #hidden-content {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            display: none;
-        }
     </style>
 </head>
 <body>
     <div id="matrix"></div>
-
-    <div id="hidden-content">
-        <p>
-            Nothing is as it seems, Philipp...<br>
-            The Matrix is a system. This system is our enemy.<br>
-            But when you're inside, look around, what do you see?
-        </p>
-    </div>
 
     <script>
         const matrix = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
         const font = 16;
         const columns = Math.floor(window.innerWidth / font);
         const drops = Array.from({ length: columns }, () => ({ position: 0, opacity: Math.random() }));
-        let isPasswordCorrect = false;
 
         function draw() {
             let output = "";
@@ -71,21 +53,6 @@
         window.addEventListener("resize", () => {
             columns = Math.floor(window.innerWidth / font);
         });
-
-        function checkPassword() {
-            var enteredPassword = document.getElementById('password').value;
-            if (enteredPassword === '2000174786') {
-                isPasswordCorrect = true;
-                fadeOutMatrix();
-            } else {
-                alert('Incorrect password. Try again.');
-            }
-        }
-
-        function fadeOutMatrix() {
-            document.getElementById('matrix').style.display = 'none';
-            document.getElementById('hidden-content').style.display = 'block';
-        }
     </script>
 </body>
 </html>
