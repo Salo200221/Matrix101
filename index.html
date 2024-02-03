@@ -27,20 +27,27 @@
         const font = 12;
         const columns = Math.floor(window.innerWidth / font);
         const rows = Math.floor(window.innerHeight / font);
-        const drops = Array.from({ length: columns }, () => Math.floor(Math.random() * rows));
-        const resetInterval = 5000; // Reset every 5 seconds
+        const drops = Array.from({ length: columns }, () => ({ position: Math.floor(Math.random() * rows), opacity: 1 }));
+        const fadeSpeed = 0.02;
 
         function draw() {
             let output = "";
 
             for (let i = 0; i < columns; i++) {
                 let text = matrix[Math.floor(Math.random() * matrix.length)];
-                output += `<span style="position: absolute; top: ${drops[i] * font}px; left: ${i * font}px;">${text}</span>`;
+                output += `<span style="position: absolute; top: ${drops[i].position * font}px; left: ${i * font}px; opacity: ${drops[i].opacity};">${text}</span>`;
 
-                if (drops[i] * font > window.innerHeight || Math.random() > 0.98) {
-                    drops[i] = Math.floor(Math.random() * rows);
+                if (drops[i].position * font > window.innerHeight || Math.random() > 0.98) {
+                    drops[i].position = 0;
+                    drops[i].opacity = 1;
                 }
-                drops[i] += Math.floor(Math.random() * 3); // Increase falling speed
+
+                drops[i].position += Math.floor(Math.random() * 3) + 1; // Increase falling speed
+                drops[i].opacity -= fadeSpeed;
+
+                if (drops[i].opacity < 0) {
+                    drops[i].opacity = 0;
+                }
             }
 
             document.getElementById("matrix").innerHTML = output;
@@ -52,15 +59,9 @@
             columns = Math.floor(window.innerWidth / font);
             rows = Math.floor(window.innerHeight / font);
             for (let i = 0; i < columns; i++) {
-                drops[i] = Math.floor(Math.random() * rows);
+                drops[i] = { position: Math.floor(Math.random() * rows), opacity: 1 };
             }
         });
-
-        setInterval(() => {
-            for (let i = 0; i < columns; i++) {
-                drops[i] = Math.floor(Math.random() * rows);
-            }
-        }, resetInterval);
     </script>
 </body>
 </html>
