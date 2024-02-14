@@ -2,98 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matrix</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background: #000;
-            color: #00FF00;
-        }
-
-        #matrix {
-            position: fixed;
-            top: 0;
-            left: 0;
-            font-family: 'Courier New', monospace;
-        }
-
-        #hidden-content {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            display: none;
-        }
-
-        #matrix-message {
-            opacity: 0;
-            transition: opacity 5s;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <title>Matrix Code</title>
 </head>
 <body>
-    <div id="matrix"></div>
-
-    <div id="hidden-content">
-        <p id="matrix-message">
-            Nothing is as it seems, Philipp...<br>
-            The Matrix is a system. This system is our enemy.<br>
-            But when you're inside, look around, what do you see?
-        </p>
+    <div class="matrix-bg">
+        <div class="container">
+            <h1>Welcome to the Matrix</h1>
+            <label for="password">Enter the Matrix Code:</label>
+            <input type="password" id="password" placeholder="Enter password">
+            <button onclick="checkPassword()">Submit</button>
+            <div id="hidden-content" style="display: none;">
+                <p class="matrix-text">
+                    Nothing is as it seems, Philipp...<br>
+                    The Matrix is a system. This system is our enemy.<br>
+                    But when you're inside, look around, what do you see?
+                </p>
+            </div>
+        </div>
     </div>
-
-    <script>
-        const matrix = "A+jk js:2 @dfs 17 tr YY ufds M5r P87 #18 $!& ^dfs $Ew er JH # $ * . (! ;) ,: :";
-        const font = 16;
-        const columns = Math.floor(window.innerWidth / font);
-        const drops = Array.from({ length: columns }, () => ({ position: 0, opacity: Math.random() }));
-        let isPasswordCorrect = false;
-
-        function draw() {
-            let output = "";
-
-            for (let i = 0; i < columns; i++) {
-                let text = matrix[Math.floor(Math.random() * matrix.length)];
-                output += `<span style="position: absolute; top: ${drops[i].position}px; left: ${i * font}px; opacity: ${drops[i].opacity}; font-size: ${font}px;">${text}</span>`;
-
-                if (drops[i].position > window.innerHeight || Math.random() > 0.98) {
-                    drops[i].position = 0;
-                    drops[i].opacity = Math.random();
-                }
-
-                drops[i].position += 5; // Fallgeschwindigkeit anpassen
-            }
-
-            document.getElementById("matrix").innerHTML = output;
-        }
-
-        setInterval(draw, 30);
-
-        window.addEventListener("resize", () => {
-            columns = Math.floor(window.innerWidth / font);
-        });
-
-        function checkPassword() {
-            var enteredPassword = document.getElementById('password').value;
-            if (enteredPassword === '2000174786') {
-                isPasswordCorrect = true;
-                fadeOutMatrix();
-            } else {
-                alert('Incorrect password. Try again.');
-            }
-        }
-
-        function fadeOutMatrix() {
-            document.getElementById('matrix').style.display = 'none';
-            document.getElementById('hidden-content').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('matrix-message').style.opacity = 1;
-            }, 1000);
-        }
-    </script>
 </body>
 </html>
